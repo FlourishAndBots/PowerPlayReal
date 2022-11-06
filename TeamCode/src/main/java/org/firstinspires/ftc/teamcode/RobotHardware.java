@@ -46,8 +46,8 @@ public class RobotHardware {
         //control hub config names in green
         FrontRightMotor = hwMap.get(DcMotor.class, "FR");
         FrontLeftMotor = hwMap.get(DcMotor.class, "FL");
-        BackRightMotor = hwMap.get(DcMotor.class, "BL");
-        BackLeftMotor = hwMap.get(DcMotor.class, "BR");
+        BackRightMotor = hwMap.get(DcMotor.class, "BR");
+        BackLeftMotor = hwMap.get(DcMotor.class, "BL");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
