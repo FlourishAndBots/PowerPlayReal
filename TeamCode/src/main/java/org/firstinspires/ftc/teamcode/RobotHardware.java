@@ -62,7 +62,7 @@ public class RobotHardware {
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        setMotorPowers(0);
+        setMotorPowers(0, 0, 0, 0);
 
     }
         public void setMotorPowers(double FRPower, double FLPower, double BRPower, double BLPower){
@@ -71,11 +71,13 @@ public class RobotHardware {
             BackRightMotor.setPower(BRPower);
             BackLeftMotor.setPower(BLPower);
         }
-
+        /*
         public void setMotorPowers(double allPower) {
             setMotorPowers(allPower, allPower, allPower, allPower);
 
         }
+*/
+    //public void setMotorPower(double FR)
 
 
 

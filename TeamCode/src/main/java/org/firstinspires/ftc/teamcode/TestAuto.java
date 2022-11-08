@@ -13,8 +13,8 @@ public class TestAuto extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.5;
-    static final double     TURN_SPEED    = 0.5;
+    static final double     FORWARD_SPEED = 1;
+   // static final double     TURN_SPEED    = 0.5;
 
     @Override
     public void runOpMode() {
@@ -28,22 +28,40 @@ public class TestAuto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.setMotorPowers(FORWARD_SPEED);
+        robot.setMotorPowers(FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED);
+
         runtime.reset();
+
         while (opModeIsActive() && runtime.milliseconds() < 5000){
             telemetry.addData("moving forward", "");
             telemetry.update();
         }
-        robot.setMotorPowers(0);
+
+        robot.setMotorPowers(1, 0, 0, 0);
+        sleep(2000);
+        robot.setMotorPowers(0, 1, 0, 0);
+        sleep(2000);
+        robot.setMotorPowers(0, 0, 1, 0);
+        sleep(2000);
+        robot.setMotorPowers(0, 0, 0, 1);
+        sleep(2000);
+
+        runtime.reset();
+
+        robot.setMotorPowers(1, 1, 1, 1);
+        //robot.setMotorPowers(-1);
         sleep(1000);
 
-        robot.setMotorPowers(-TURN_SPEED, -TURN_SPEED, TURN_SPEED, TURN_SPEED);
-        runtime.reset();
+        //robot.setMotorPowers(-TURN_SPEED, -TURN_SPEED, TURN_SPEED, TURN_SPEED);
+       // runtime.reset();
+       /*
         while (opModeIsActive() && runtime.milliseconds() < 3000){
             telemetry.addData("turning left", "");
             telemetry.update();
         }
-        robot.setMotorPowers(0);
+        \
+        */
+        robot.setMotorPowers(0, 0, 0, 0);
         sleep(1000);
     }
 }
