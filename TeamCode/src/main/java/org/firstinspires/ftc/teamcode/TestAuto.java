@@ -22,35 +22,36 @@ public class TestAuto extends LinearOpMode {
       robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Ready to run");    //
+        telemetry.addData("Status", "hey lol");    //
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.setMotorPowers(FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED);
+       // robot.setMotorPowers(FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED);
 
-        runtime.reset();
+       // runtime.reset();
 
         while (opModeIsActive() && runtime.milliseconds() < 5000){
-            telemetry.addData("moving forward", "");
+            telemetry.addData("moving lol", "");
             telemetry.update();
         }
 
-        robot.setMotorPowers(1, 0, 0, 0);
+        robot.setMotorPowers(0.25, 0.25, 0.25, 0.25);
         sleep(2000);
+        /*
         robot.setMotorPowers(0, 1, 0, 0);
         sleep(2000);
         robot.setMotorPowers(0, 0, 1, 0);
         sleep(2000);
         robot.setMotorPowers(0, 0, 0, 1);
         sleep(2000);
-
+*/
         runtime.reset();
 
-        robot.setMotorPowers(1, 1, 1, 1);
+      //  robot.setMotorPowers(0.25, 1, 1, 1);
         //robot.setMotorPowers(-1);
-        sleep(1000);
+        //sleep(1000);
 
         //robot.setMotorPowers(-TURN_SPEED, -TURN_SPEED, TURN_SPEED, TURN_SPEED);
        // runtime.reset();

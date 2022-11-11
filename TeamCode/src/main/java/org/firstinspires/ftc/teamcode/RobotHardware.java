@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -30,6 +31,8 @@ public class RobotHardware {
     public DcMotor FrontLeftMotor  = null;
     public DcMotor BackRightMotor = null;
     public DcMotor BackLeftMotor = null;
+   // public Servo Claw = null;
+    //public Servo Swing = null;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -48,36 +51,55 @@ public class RobotHardware {
         FrontLeftMotor = hwMap.get(DcMotor.class, "FL");
         BackRightMotor = hwMap.get(DcMotor.class, "BR");
         BackLeftMotor = hwMap.get(DcMotor.class, "BL");
-
+        //Claw = hwMap.get(Servo.class, "Claw");
+        //Swing = hwMap.get(Servo.class, "Swing");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        BackRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        //orients wheels
+        BackRightMotor.setDirection(DcMotor.Direction.FORWARD);
         BackLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         FrontRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        FrontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        FrontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+
+        //makes sure motors don't turn on
+        BackRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         setMotorPowers(0, 0, 0, 0);
+        setAllMotorPowers(0);
+        turn(0, 0);
 
     }
+
         public void setMotorPowers(double FRPower, double FLPower, double BRPower, double BLPower){
             FrontRightMotor.setPower(FRPower);
             FrontLeftMotor.setPower(FLPower);
             BackRightMotor.setPower(BRPower);
             BackLeftMotor.setPower(BLPower);
         }
-        /*
-        public void setMotorPowers(double allPower) {
+
+
+        public void setAllMotorPowers(double allPower) {
             setMotorPowers(allPower, allPower, allPower, allPower);
 
         }
-*/
-    //public void setMotorPower(double FR)
+
+        public void turn(double LeftPower, double RightPower){
+            FrontLeftMotor.setPower(LeftPower);
+            BackLeftMotor.setPower(LeftPower);
+            FrontRightMotor.setPower(RightPower);
+            BackRightMotor.setPower(RightPower);
+        }
 
 
 
