@@ -1,7 +1,9 @@
+//where file is located
 package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.robotcontroller.external.samples.RobotHardware.MID_SERVO;
 
+//necessary import statements for motors, servos and etc
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -27,9 +29,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  */
 
+//class name
 public class RobotHardware {
 
-    // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
+    // motor and servos are defined here
     public DcMotor FrontRightMotor   = null;
     public DcMotor FrontLeftMotor  = null;
     public DcMotor BackRightMotor = null;
@@ -57,7 +60,7 @@ public class RobotHardware {
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
-        //control hub config names in green
+        //motor configs in green - what is shown in the driver station config file
         FrontRightMotor = hwMap.get(DcMotor.class, "FR");
         FrontLeftMotor = hwMap.get(DcMotor.class, "FL");
         BackRightMotor = hwMap.get(DcMotor.class, "BR");
@@ -96,6 +99,7 @@ public class RobotHardware {
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        //calling methods - setting them to 0
         setMotorPowers(0, 0, 0, 0);
         setAllMotorPowers(0);
         turn(0, 0);
@@ -104,6 +108,9 @@ public class RobotHardware {
 
     }
 
+    //methods are created here
+
+        //makes it easier to set all the individual motor powers
         public void setMotorPowers(double FRPower, double FLPower, double BRPower, double BLPower){
             FrontRightMotor.setPower(FRPower);
             FrontLeftMotor.setPower(FLPower);
@@ -111,6 +118,7 @@ public class RobotHardware {
             BackLeftMotor.setPower(BLPower);
         }
 
+        //makes it easier to set the individual motor powers of the elevator - probably not needed bc they need to move together // CHANGE THIS TO ONE POWER
         public void setElevatorPower(double RPower, double LPower){
             RightElevator.setPower(RPower);
             LeftElevator.setPower(LPower);
@@ -119,12 +127,13 @@ public class RobotHardware {
 
 
 
-
+        //makes it easier to set all the motor powers at once
         public void setAllMotorPowers(double allPower) {
             setMotorPowers(allPower, allPower, allPower, allPower);
 
         }
 
+        //method to turn robot
         public void turn(double LeftPower, double RightPower){
             FrontLeftMotor.setPower(LeftPower);
             BackLeftMotor.setPower(LeftPower);
@@ -132,9 +141,7 @@ public class RobotHardware {
             BackRightMotor.setPower(RightPower);
         }
 
-        //public void setClawPosition(double Position){
-         //   Claw.setPosition(Position);
-        //}
+
 
 
 
