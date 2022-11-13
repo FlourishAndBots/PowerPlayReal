@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcontroller.external.samples.RobotHardware.MID_SERVO;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -31,8 +34,16 @@ public class RobotHardware {
     public DcMotor FrontLeftMotor  = null;
     public DcMotor BackRightMotor = null;
     public DcMotor BackLeftMotor = null;
-   // public Servo Claw = null;
-    //public Servo Swing = null;
+    public DcMotor RightElevator = null;
+    public DcMotor LeftElevator = null;
+    public Servo Claw = null;
+    public Servo Swing = null;
+
+        public final static double CLAW_HOME = 0.5;
+        public final static double SWING_HOME = 0.5;
+
+    public final static double MIN_POSITION = 0;
+    public final static double MAX_POSITION = 1;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -51,8 +62,9 @@ public class RobotHardware {
         FrontLeftMotor = hwMap.get(DcMotor.class, "FL");
         BackRightMotor = hwMap.get(DcMotor.class, "BR");
         BackLeftMotor = hwMap.get(DcMotor.class, "BL");
-        //Claw = hwMap.get(Servo.class, "Claw");
-        //Swing = hwMap.get(Servo.class, "Swing");
+        RightElevator = hwMap.get(DcMotor.class, "rightElevator");
+        LeftElevator = hwMap.get(DcMotor.class, "leftElevator");
+
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -62,6 +74,15 @@ public class RobotHardware {
         BackLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         FrontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         FrontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        RightElevator.setDirection(DcMotor.Direction.FORWARD);
+        LeftElevator.setDirection(DcMotor.Direction.REVERSE);
+
+
+        //Claw.setPosition(MID_SERVO);
+        //Swing.setPosition(MID_SERVO);
+
+        //Claw.setPosition(CLAW_HOME);
+        //Swing.setPosition(SWING_HOME);
 
         //makes sure motors don't turn on
         BackRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -78,6 +99,8 @@ public class RobotHardware {
         setMotorPowers(0, 0, 0, 0);
         setAllMotorPowers(0);
         turn(0, 0);
+        setElevatorPower(0, 0);
+       // setClawPosition(0);
 
     }
 
@@ -87,6 +110,14 @@ public class RobotHardware {
             BackRightMotor.setPower(BRPower);
             BackLeftMotor.setPower(BLPower);
         }
+
+        public void setElevatorPower(double RPower, double LPower){
+            RightElevator.setPower(RPower);
+            LeftElevator.setPower(LPower);
+
+        }
+
+
 
 
         public void setAllMotorPowers(double allPower) {
@@ -101,9 +132,13 @@ public class RobotHardware {
             BackRightMotor.setPower(RightPower);
         }
 
+        //public void setClawPosition(double Position){
+         //   Claw.setPosition(Position);
+        //}
 
 
-    }
+
+}
 
 
 

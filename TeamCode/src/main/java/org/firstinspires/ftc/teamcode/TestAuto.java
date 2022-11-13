@@ -13,7 +13,7 @@ public class TestAuto extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 1;
+    //static final double     FORWARD_SPEED = 1;
    // static final double     TURN_SPEED    = 0.5;
 
     @Override
@@ -22,7 +22,7 @@ public class TestAuto extends LinearOpMode {
       robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "hey lol");    //
+        telemetry.addData("Status", "hey lol");
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -30,15 +30,15 @@ public class TestAuto extends LinearOpMode {
 
        // robot.setMotorPowers(FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED, FORWARD_SPEED);
 
-       // runtime.reset();
+        runtime.reset();
 
         while (opModeIsActive() && runtime.milliseconds() < 5000){
             telemetry.addData("moving lol", "");
             telemetry.update();
         }
 
-        robot.setMotorPowers(0.25, 0.25, 0.25, 0.25);
-        sleep(2000);
+        robot.setMotorPowers(0.5, 0.5, 0.5, 0.5);
+        sleep(5000);
         /*
         robot.setMotorPowers(0, 1, 0, 0);
         sleep(2000);
