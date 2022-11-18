@@ -49,6 +49,9 @@ public class RobotHardware {
     public final static double MIN_POSITION = 0;
     public final static double MAX_POSITION = 1;
 
+   // public static final double MOTOR_TICK_COUNTS = 537.6;
+
+
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
 
@@ -94,7 +97,11 @@ public class RobotHardware {
         FrontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FrontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        RightElevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LeftElevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        RightElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        LeftElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -108,6 +115,8 @@ public class RobotHardware {
        // setClawPosition(0);
 
     }
+
+
 
     //methods are created here
 
