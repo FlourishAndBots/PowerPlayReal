@@ -1,16 +1,12 @@
 //where file is located
 package org.firstinspires.ftc.teamcode;
 
-import static com.qualcomm.robotcore.hardware.Servo.MAX_POSITION;
-import static com.qualcomm.robotcore.hardware.Servo.MIN_POSITION;
-
 //necessary import statements
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
+        import com.qualcomm.robotcore.util.ElapsedTime;
 
 //teleop tag to make it a teleop program - stuff in parenthesis is what shows up on driver station
 @TeleOp(name="Robot: TeleOp", group="Robot")
@@ -35,14 +31,15 @@ public class TeleOpTest extends LinearOpMode {
         Claw = hardwareMap.get(CRServo.class, "Claw");
         Swing = hardwareMap.get(CRServo.class, "Swing");
 
-        robot.RightElevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.LeftElevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.RightElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.LeftElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         waitForStart();
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
 
+        /*
         robot.RightElevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.RightElevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -51,7 +48,7 @@ public class TeleOpTest extends LinearOpMode {
 
         int leftPos = robot.LeftElevator.getCurrentPosition();
         int rightPos = robot.RightElevator.getCurrentPosition();
-
+*/
 
 
 
@@ -70,10 +67,13 @@ public class TeleOpTest extends LinearOpMode {
             boolean swing = gamepad1.x;
             boolean swing2 = gamepad1.b;
 
+            boolean clawOpen = gamepad2.x;
+            boolean clawClose = gamepad2.b;
+
 
             //driving
-            if (gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.right_stick_y > 0.2) {
-                robot.setMotorPowers(left,left,right,right);
+            if (gamepad1.right_stick_y > 0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2 || gamepad1.right_stick_y < -0.2) {
+                robot.setMotorPowers(-right, -left, -right, -left);
             }
             //stop
             else if (gamepad1.right_stick_y < 0.2 || gamepad1.left_stick_y < 0.2 || gamepad1.left_stick_y > -0.2 || gamepad1.right_stick_y > -0.2) {
@@ -93,44 +93,26 @@ public class TeleOpTest extends LinearOpMode {
             if (gamepad2.left_stick_y < -0.2) {
                 robot.RightElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.LeftElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                robot.setElevatorPower(1,1);}
-            else if (gamepad2.left_stick_y > 0.2) {
+                robot.setElevatorPower(1,1);
+            }
+            else if (gamepad2.left_stick_y > 0.2){
                 robot.RightElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.LeftElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                robot.setElevatorPower(-1,-1);}
-            else if (gamepad2.a || gamepad2.b || gamepad2.y) {
-                robot.RightElevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.LeftElevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.RightElevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.LeftElevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                if (gamepad2.a) {
-                    robot.RightElevator.setTargetPosition(200);
-                    robot.LeftElevator.setTargetPosition(200); }
-                else if (gamepad2.b) {
-                    robot.RightElevator.setTargetPosition(400);
-                    robot.LeftElevator.setTargetPosition(400); }
-                else if (gamepad2.y) {
-                    robot.RightElevator.setTargetPosition(600);
-                    robot.LeftElevator.setTargetPosition(600); }
-                robot.RightElevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.LeftElevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.setElevatorPower(1,1);
-                while (opModeIsActive() && robot.LeftElevator.isBusy()){
-                    telemetry.addData("encoder left:", robot.LeftElevator.getCurrentPosition());
-                    telemetry.addData("encoder right:", robot.RightElevator.getCurrentPosition());
-                    telemetry.update();
-                    idle();
-                }
+                robot.setElevatorPower(-1,-1);
+            }
+            else{
+                robot.RightElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.LeftElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.setElevatorPower(0,0);
             }
 
 
             //claw
 
-            if (gamepad2.right_stick_y > 0.1) {
+            if (gamepad2.right_stick_y < -0.1) {
                 Claw.setPower(-1);
             }
-            if (gamepad2.right_stick_y < -0.1) {
+            if (gamepad2.right_stick_y > 0.1) {
                 Claw.setPower(1);
             }
 
