@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="Park Left", group="Robot")
@@ -10,7 +11,10 @@ public class ParkLeft extends LinearOpMode {
     /* Declare OpMode members. */
     RobotHardware robot = new RobotHardware();
 
+
+
     private ElapsedTime     runtime = new ElapsedTime();
+    private CRServo Claw;
 
 
     //static final double     FORWARD_SPEED = 1;
@@ -21,6 +25,8 @@ public class ParkLeft extends LinearOpMode {
 
       robot.init(hardwareMap);
 
+        Claw = hardwareMap.get(CRServo.class, "Claw");
+
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "hi");
         telemetry.update();
@@ -30,6 +36,8 @@ public class ParkLeft extends LinearOpMode {
 
         robot.setAllMotorPowers(0.5);
         runtime.reset();
+
+
 
         while (opModeIsActive() && (runtime.seconds() < 0.3)) {
             telemetry.addData("moving forward", "Leg 1: %4.1f S Elapsed", runtime.seconds());
@@ -46,6 +54,8 @@ public class ParkLeft extends LinearOpMode {
             telemetry.addData("moving forward", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
+
+        Claw.setPower(1);
 
 
         robot.setAllMotorPowers(0);
