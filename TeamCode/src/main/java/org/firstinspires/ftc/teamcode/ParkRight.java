@@ -50,7 +50,7 @@ public class ParkRight extends LinearOpMode {
         }
 
 
-        Claw.setPower(1);
+     //   Claw.setPower(1);
 
         robot.setAllMotorPowers(0);
 

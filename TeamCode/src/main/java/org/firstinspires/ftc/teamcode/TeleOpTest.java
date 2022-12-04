@@ -110,17 +110,17 @@ public class TeleOpTest extends LinearOpMode {
             //claw
 
             if (gamepad2.right_stick_y < -0.1) {
-                Claw.setPower(-1);
+                Claw.setPower(1);
             }
             if (gamepad2.right_stick_y > 0.1) {
-                Claw.setPower(1);
+                Claw.setPower(-1);
             }
 
             //swing
-            if (gamepad1.x){
+            if (gamepad2.right_bumper){
                 Swing.setPower(1);
             }
-            if (gamepad1.b) {
+            if (gamepad2.left_bumper) {
                 Swing.setPower(-1);
             }
         }
