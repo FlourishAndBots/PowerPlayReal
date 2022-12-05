@@ -191,7 +191,7 @@ public class  CameraEx extends LinearOpMode
 
             robot.setMotorPowers(0.5,-0.5,-0.5,0.5);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+            while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                 telemetry.addData("moving left", "Leg 1: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
@@ -216,10 +216,20 @@ public class  CameraEx extends LinearOpMode
             sleep(20000);
 
         }else if(tagOfInterest.id == MIDDLE){
+            robot.setMotorPowers(0.5,-0.5,-0.5,0.5);
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 0.25)) { //straves left
+                telemetry.addData("moving forward", "Leg 1: %4.1f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
+            robot.setAllMotorPowers(0);
+            sleep(1000);
+            runtime.reset();
+
             robot.setAllMotorPowers(0.5);
             runtime.reset();
 
-            while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+            while (opModeIsActive() && (runtime.seconds() < 1.1)) {
                 telemetry.addData("moving forward", "Leg 1: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
@@ -242,7 +252,7 @@ public class  CameraEx extends LinearOpMode
 
             robot.setMotorPowers(-0.5,0.5,0.5,-0.5);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+            while (opModeIsActive() && (runtime.seconds() < 1.1)) {
                 telemetry.addData("moving right", "Leg 1: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
